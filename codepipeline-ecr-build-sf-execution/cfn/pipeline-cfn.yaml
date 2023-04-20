@@ -39,7 +39,7 @@ Resources:
                   - logs:CreateLogStream
                   - logs:PutLogEvents
                   - ecr:GetAuthorizationToken                                         
-              - Resource: !Sub arn:aws:s3:::${artifcatbuck}/*
+              - Resource: !Sub arn:aws:s3:::artifcatbuck
                 Effect: Allow
                 Action:
                   - s3:GetObject
@@ -72,7 +72,7 @@ Resources:
             Version: 2012-10-17
             Statement:
               - Resource:
-                  - !Sub arn:aws:s3:::${artifcatbuck}/*
+                  - !Sub arn:aws:s3:::artifcatbuck
                 Effect: Allow
                 Action:
                   - s3:PutObject
