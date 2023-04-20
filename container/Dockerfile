@@ -2,8 +2,8 @@
 # This is a Python 2 image that uses the nginx, gunicorn, flask stack
 # for serving inferences in a stable way.
 
-#FROM public.ecr.aws/lts/ubuntu:20.04
-FROM ubuntu:20.04
+FROM public.ecr.aws/lts/ubuntu:20.04
+#FROM ubuntu:20.04
 #FROM docker pull ubuntu@sha256:b795f8e0caaaacad9859a9a38fe1c78154f8301fdaf0872eaf1520d66d9c0b98
 RUN apt-get -y update && apt-get install -y --no-install-recommends \
          wget \
