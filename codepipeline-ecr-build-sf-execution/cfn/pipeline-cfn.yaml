@@ -111,7 +111,9 @@ Resources:
                 - echo "IMAGE_URI=${IMAGE_URI}"
             build:
               commands:
+                - mkdir container
                 - cd container
+                - ls
                 - docker build --tag "$IMAGE_URI" .
             post_build:
               commands:
