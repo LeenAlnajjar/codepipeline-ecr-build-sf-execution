@@ -39,7 +39,7 @@ Resources:
                   - logs:CreateLogStream
                   - logs:PutLogEvents
                   - ecr:GetAuthorizationToken                                         
-              - Resource: !Sub arn:aws:s3:::artifcatbuck
+              - Resource: !Sub arn:aws:s3:::${ArtifactBucket}/*
                 Effect: Allow
                 Action:
                   - s3:GetObject
@@ -72,7 +72,7 @@ Resources:
             Version: 2012-10-17
             Statement:
               - Resource:
-                  - !Sub arn:aws:s3:::artifcatbuck
+                  - !Sub arn:aws:s3:::${ArtifactBucket}/*
                 Effect: Allow
                 Action:
                   - s3:PutObject
@@ -88,7 +88,7 @@ Resources:
                   - states:DescribeStateMachine
                   - states:StartExecution
                   - states:DescribeExecution  
-  artifcatbuck:
+  ArtifactBucket:
     Type: AWS::S3::Bucket
     DeletionPolicy: Delete
   CodeBuildProject:
@@ -111,9 +111,7 @@ Resources:
                 - echo "IMAGE_URI=${IMAGE_URI}"
             build:
               commands:
-                - mkdir container
                 - cd container
-                - ls
                 - docker build --tag "$IMAGE_URI" .
             post_build:
               commands:
@@ -139,7 +137,7 @@ Resources:
       RoleArn: !GetAtt CodePipelineServiceRole.Arn
       ArtifactStore:
         Type: S3
-        Location: !Ref artifactbucket
+        Location: !Ref ArtifactBucket
       Stages:
         - Name: GetSource
           Actions:
@@ -191,5 +189,5 @@ Resources:
 Outputs:
   PipelineUrl:
     Value: !Sub https://console.aws.amazon.com/codepipeline/home?region=${AWS::Region}#/view/${Pipeline}
-  artifactbucket:
-    Value: !Ref artifactbucket
+  ArtifactBucket:
+    Value: !Ref ArtifactBucket
