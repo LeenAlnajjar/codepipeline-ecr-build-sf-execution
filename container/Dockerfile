@@ -2,8 +2,8 @@
 # This is a Python 2 image that uses the nginx, gunicorn, flask stack
 # for serving inferences in a stable way.
 
-FROM public.ecr.aws/lts/ubuntu:20.04
-
+#FROM public.ecr.aws/lts/ubuntu:20.04
+FROM ubuntu:20.04
 
 RUN apt-get -y update && apt-get install -y --no-install-recommends \
          wget \
