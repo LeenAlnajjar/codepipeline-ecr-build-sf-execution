@@ -104,7 +104,7 @@ Resources:
             pre_build:
               commands:
                 - printenv | less
-                - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 894632372107.dkr.ecr.us-east-1.amazonaws.com/codepipeline-ecr-build-sf-execution-repository-40hko7sesj9g
+                - aws ecr get-login-password --region us-east-1 
                 - dt=`date '+%m-%d-%Y-%H-%M-%S'`
                 - TAG="$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | head -c 8)-${dt}"                
                 - IMAGE_URI="${REPOSITORY_URI}:${TAG}"
